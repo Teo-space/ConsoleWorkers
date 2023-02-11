@@ -55,18 +55,18 @@ public record WorkerContainer(string name, string path, string args)
 	}
 
 
-	public delegate void OutputDataReceivedDelegate(string workerName, string message);
+	public delegate void OutputDelegate(string workerName, string message);
 
-	List<OutputDataReceivedDelegate> OutputDataReceivedSubs = new();
-	public WorkerContainer AddOnOutputDataReceived(OutputDataReceivedDelegate d)
+	List<OutputDelegate> OutputDataReceivedSubs = new();
+	public WorkerContainer AddOnOutput(OutputDelegate d)
 	{
 		OutputDataReceivedSubs.Add(d);
 		return this;
 	}
 
-	public delegate void ErrorDataReceivedDelegate(string workerName, string message);
-	List<ErrorDataReceivedDelegate> ErrorDataReceivedSubs = new();
-	public WorkerContainer AddOnErrorDataReceived(ErrorDataReceivedDelegate d)
+	public delegate void ErrorDelegate(string workerName, string message);
+	List<ErrorDelegate> ErrorDataReceivedSubs = new();
+	public WorkerContainer AddOnError(ErrorDelegate d)
 	{
 		ErrorDataReceivedSubs.Add(d);
 		return this;
@@ -74,7 +74,7 @@ public record WorkerContainer(string name, string path, string args)
 
 	public delegate void ProcessExitedDelegate(string workerName, int Code);
 	List<ProcessExitedDelegate> ProcessExitedSubs = new();
-	public WorkerContainer AddProcessExited(ProcessExitedDelegate d)
+	public WorkerContainer AddOnExited(ProcessExitedDelegate d)
 	{
 		ProcessExitedSubs.Add(d);
 		return this;

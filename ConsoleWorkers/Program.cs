@@ -20,9 +20,9 @@ ThreadPool.QueueUserWorkItem((o) =>
 
 	WorkerContainer.Create("Worker1", "Worker.exe", "2000 1")
 	//.EnableLogging()
-	.AddOnOutputDataReceived((name, message) => print($"[Worker:{name}] Output {message}"))
-	.AddOnErrorDataReceived((name, message) => print($"[Worker:{name}] OnError {message}"))
-	.AddProcessExited((name, code) =>
+	.AddOnOutput((name, message) => print($"[Worker:{name}] Output {message}"))
+	.AddOnError((name, message) => print($"[Worker:{name}] OnError {message}"))
+	.AddOnExited((name, code) =>
 	{
 		print($"[Worker:{name}] Exit Code {code}");
 		WorkersEnded ++;
@@ -38,9 +38,9 @@ ThreadPool.QueueUserWorkItem((o) =>
 
 	WorkerContainer.Create("Worker1", "Worker.exe", "1000 2")
 	//.EnableLogging()
-	.AddOnOutputDataReceived((name, message) => print($"[Worker:{name}] Output {message}"))
-	.AddOnErrorDataReceived((name, message) => print($"[Worker:{name}] OnError {message}"))
-	.AddProcessExited((name, code) =>
+	.AddOnOutput((name, message) => print($"[Worker:{name}] Output {message}"))
+	.AddOnError((name, message) => print($"[Worker:{name}] OnError {message}"))
+	.AddOnExited((name, code) =>
 	{
 		print($"[Worker:{name}] Exit Code {code}");
 		WorkersEnded ++;
